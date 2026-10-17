@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Тест — 5 языков любви</title>
+  <meta name="description" content="Тест из 10 вопросов определит ваш главный язык любви. Пройдите его вдвоём с партнёром и сравните результаты.">
+  <meta name="theme-color" content="#FFF8F6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html">
+        <svg viewBox="-50 -50 100 100" aria-hidden="true" focusable="false"><circle cx="0" cy="0" r="48" fill="#C2255C"/><path d="M0 26C-52-12-30-50 0-24C30-50 52-12 0 26Z" fill="#FFFFFF"/></svg>
+        5 языков любви
+      </a>
+      <nav class="nav" aria-label="Основное меню">
+        <a href="index.html">Главная</a>
+        <a href="test.html" aria-current="page">Тест</a>
+        <a href="ideas.html">Генератор идей</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="container container--narrow page-head">
+      <p class="eyebrow">Интерактивный тест</p>
+      <h1 class="display display--page">Узнайте свой <span class="accent">язык любви</span></h1>
+      <p class="lead">10 вопросов, в каждом два утверждения. Выбирайте то, что ближе именно вам. Пройдите тест вдвоём и сравните результаты.</p>
+    </section>
+
+    <!-- Шаг 1: настройка -->
+    <section class="container container--narrow block" id="setup" aria-labelledby="setup-title">
+      <div class="card card--setup">
+        <h2 class="sr-only" id="setup-title">Настройка теста</h2>
+
+        <fieldset class="chip-group">
+          <legend class="sr-only">Как проходить тест</legend>
+          <div class="segmented">
+            <label class="segmented__item">
+              <input type="radio" name="mode" value="solo">
+              <span>Пройти одному</span>
+            </label>
+            <label class="segmented__item">
+              <input type="radio" name="mode" value="pair" checked>
+              <span>Пройти вдвоём</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="names" id="names">
+          <div class="field">
+            <label for="name1">Имя первого партнёра</label>
+            <input id="name1" type="text" maxlength="30" placeholder="Например, Анна" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="name2">Имя второго партнёра</label>
+            <input id="name2" type="text" maxlength="30" placeholder="Например, Максим" autocomplete="off">
+          </div>
+        </div>
+
+        <button type="button" class="btn btn--primary" id="start-btn">Начать тест
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+
+        <noscript><p class="note">Для работы теста нужен включённый JavaScript.</p></noscript>
+      </div>
+    </section>
+
+    <!-- Шаг 2: вопросы -->
+    <section class="container container--narrow block" id="quiz" aria-labelledby="quiz-title" hidden>
+      <div class="card">
+        <div class="quiz__top">
+          <p class="quiz__count" id="quiz-count" aria-live="polite">Вопрос 1 из 10</p>
+          <p class="chip lang--time" id="quiz-player" hidden></p>
+        </div>
+        <div class="progress" id="progress" role="progressbar" aria-label="Прогресс теста" aria-valuemin="0" aria-valuemax="10" aria-valuenow="1">
+          <div class="progress__bar" id="progress-bar"></div>
+        </div>
+
+        <h2 class="quiz__title" id="quiz-title" tabindex="-1">Что для вас важнее?</h2>
+        <p class="quiz__hint">Выберите одно утверждение, которое ближе именно вам.</p>
+
+        <div class="options" role="group" aria-labelledby="quiz-title">
+          <button type="button" class="option" id="opt-a" aria-pressed="false">
+            <span class="option__letter option__letter--a" aria-hidden="true">A</span>
+            <span id="opt-a-text"></span>
+          </button>
+          <button type="button" class="option" id="opt-b" aria-pressed="false">
+            <span class="option__letter option__letter--b" aria-hidden="true">B</span>
+            <span id="opt-b-text"></span>
+          </button>
+        </div>
+
+        <div class="quiz__nav">
+          <button type="button" class="btn btn--ghost" id="btn-back" disabled>Назад</button>
+          <button type="button" class="btn btn--primary" id="btn-next" disabled>
+            <span id="btn-next-label">Далее</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Передача устройства партнёру -->
+    <section class="container container--narrow block" id="handoff" aria-labelledby="handoff-title" hidden>
+      <div class="card card--center">
+        <h2 class="card__title" id="handoff-title" tabindex="-1">Теперь очередь партнёра</h2>
+        <p class="card__text" id="handoff-text"></p>
+        <button type="button" class="btn btn--primary" id="handoff-btn">Начать тест партнёра</button>
+      </div>
+    </section>
+
+    <!-- Результаты -->
+    <section class="container results" id="results" aria-labelledby="results-title" hidden>
+      <div class="section-head">
+        <p class="eyebrow">Результаты</p>
+        <h2 class="h2" id="results-title" tabindex="-1">Ваши результаты</h2>
+        <p class="lead" id="results-lead"></p>
+      </div>
+
+      <div class="results-grid" id="results-grid"></div>
+
+      <div class="compare on-dark" id="compare" hidden>
+        <div class="compare__text">
+          <p class="eyebrow eyebrow--light">Сравнение пары</p>
+          <h3 class="compare__title" id="compare-title"></h3>
+          <p class="compare__body" id="compare-body"></p>
+        </div>
+        <div class="compare__actions" id="compare-actions"></div>
+      </div>
+
+      <div class="results-actions">
+        <a class="btn btn--primary" id="results-ideas" href="ideas.html" hidden>Перейти к идеям</a>
+        <button type="button" class="btn btn--outline" id="restart-btn">Пройти заново</button>
+      </div>
+    </section>
+
+    <div class="page-end"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__brand">5 языков любви</div>
+      <nav class="site-footer__nav" aria-label="Меню в подвале">
+        <a href="index.html">Главная</a>
+        <a href="test.html">Тест</a>
+        <a href="ideas.html">Генератор идей</a>
+      </nav>
+      <div>Учебный проект</div>
+    </div>
+  </footer>
+</body>
+</html>

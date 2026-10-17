@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Генератор идей — 5 языков любви</title>
+  <meta name="description" content="Выберите язык любви партнёра, повод и бюджет — и получите персональные идеи, чем порадовать близкого человека.">
+  <meta name="theme-color" content="#FFF8F6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html">
+        <svg viewBox="-50 -50 100 100" aria-hidden="true" focusable="false"><circle cx="0" cy="0" r="48" fill="#C2255C"/><path d="M0 26C-52-12-30-50 0-24C30-50 52-12 0 26Z" fill="#FFFFFF"/></svg>
+        5 языков любви
+      </a>
+      <nav class="nav" aria-label="Основное меню">
+        <a href="index.html">Главная</a>
+        <a href="test.html">Тест</a>
+        <a href="ideas.html" aria-current="page">Генератор идей</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="container container--narrow page-head">
+      <p class="eyebrow">Генератор идей</p>
+      <h1 class="display display--page">Идеи для <span class="accent">вашей пары</span></h1>
+      <p class="lead">Выберите язык любви партнёра, повод и бюджет — и получите персональные советы, чем порадовать близкого человека.</p>
+    </section>
+
+    <section class="container container--mid block" aria-labelledby="gen-title">
+      <form class="card" id="gen-form" action="#" novalidate>
+        <h2 class="sr-only" id="gen-title">Параметры подборки</h2>
+
+        <fieldset class="chip-group">
+          <legend class="chip-group__legend">1. Язык любви партнёра</legend>
+          <div class="chips">
+            <label class="chip-radio chip-radio--check lang--words">
+              <input type="radio" name="lang" value="words"><span>Слова поддержки</span>
+            </label>
+            <label class="chip-radio chip-radio--check lang--gifts">
+              <input type="radio" name="lang" value="gifts"><span>Подарки</span>
+            </label>
+            <label class="chip-radio chip-radio--check lang--time">
+              <input type="radio" name="lang" value="time" checked><span>Время вместе</span>
+            </label>
+            <label class="chip-radio chip-radio--check lang--help">
+              <input type="radio" name="lang" value="help"><span>Помощь</span>
+            </label>
+            <label class="chip-radio chip-radio--check lang--touch">
+              <input type="radio" name="lang" value="touch"><span>Прикосновения</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="form-grid">
+          <fieldset class="chip-group">
+            <legend class="chip-group__legend">2. Повод</legend>
+            <div class="chips">
+              <label class="chip-radio"><input type="radio" name="occasion" value="everyday"><span>Обычный день</span></label>
+              <label class="chip-radio"><input type="radio" name="occasion" value="weekend" checked><span>Выходные</span></label>
+              <label class="chip-radio"><input type="radio" name="occasion" value="anniversary"><span>Годовщина</span></label>
+              <label class="chip-radio"><input type="radio" name="occasion" value="argue"><span>После ссоры</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="chip-group">
+            <legend class="chip-group__legend">3. Бюджет</legend>
+            <div class="chips">
+              <label class="chip-radio"><input type="radio" name="budget" value="free"><span>Бесплатно</span></label>
+              <label class="chip-radio"><input type="radio" name="budget" value="cheap" checked><span>Недорого</span></label>
+              <label class="chip-radio"><input type="radio" name="budget" value="any"><span>Без ограничений</span></label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="from-test" id="from-test" hidden>
+          <p>Вы уже проходили тест. Выберите язык из результатов:</p>
+          <div class="btn-row" id="from-test-buttons"></div>
+        </div>
+
+        <button type="submit" class="btn btn--primary generate-btn">
+          <svg viewBox="-50 -50 100 100" aria-hidden="true" focusable="false"><path d="M0 28C-60-18-34-62 0-30C34-62 60-18 0 28Z" fill="#FFFFFF"/></svg>
+          Сгенерировать идеи
+        </button>
+
+        <noscript><p class="note">Для работы генератора нужен включённый JavaScript.</p></noscript>
+      </form>
+    </section>
+
+    <section class="container block block--lg" id="ideas-result" aria-labelledby="ideas-title">
+      <div id="ideas-scope" class="lang--time">
+        <div class="ideas-head">
+          <div class="ideas-head__text">
+            <p class="ideas-meta" id="ideas-meta"></p>
+            <h2 class="ideas-head__title" id="ideas-title" tabindex="-1"></h2>
+          </div>
+          <button type="button" class="btn btn--outline btn--sm" id="refresh-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 12a8 8 0 1 1-2.5-5.8M20 4v5h-5"/></svg>
+            Обновить подборку
+          </button>
+        </div>
+        <p class="note" id="ideas-note" role="status"></p>
+        <div class="idea-grid" id="idea-grid"></div>
+      </div>
+    </section>
+
+    <section class="container block block--lg" id="saved" aria-labelledby="saved-title" hidden>
+      <h2 class="ideas-head__title" id="saved-title" tabindex="-1">Сохранённые идеи</h2>
+      <p class="note">Они хранятся только в этом браузере.</p>
+      <ul class="saved-list" id="saved-list"></ul>
+    </section>
+
+    <section class="container ideas-cta" aria-labelledby="ideas-cta-title">
+      <div class="cta__box on-dark">
+        <div class="ideas-cta__text">
+          <h2 class="cta__title" id="ideas-cta-title">Не знаете язык любви партнёра?</h2>
+          <p class="cta__text">Пройдите тест вдвоём — и подборка станет ещё точнее.</p>
+        </div>
+        <a class="btn btn--light" href="test.html">Пройти тест
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <div class="page-end"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__brand">5 языков любви</div>
+      <nav class="site-footer__nav" aria-label="Меню в подвале">
+        <a href="index.html">Главная</a>
+        <a href="test.html">Тест</a>
+        <a href="ideas.html">Генератор идей</a>
+      </nav>
+      <div>Учебный проект</div>
+    </div>
+  </footer>
+</body>
+</html>
